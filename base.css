@@ -12,6 +12,7 @@ img {
   display: block;
 }
 
+
 html {
   font-size: 100%;
 }
@@ -26,7 +27,7 @@ body {
 }
 
 h1 { font-size: var(--text-3xl); line-height: 1.15; }
-h2 { font-size: var(--text-xl);  line-height: 1.25; }
+h2 { font-size: var(--text-xl); line-height: 1.25; }
 h3 { font-size: var(--text-md); }
 
 main p {
