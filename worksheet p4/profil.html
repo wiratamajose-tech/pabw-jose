@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney - Profil Hiburan & Animasi</title>
+</head>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="komponen.css">
+<link rel="stylesheet" href="tema.css">
+<body>
+
+  <header>
+    <input type="checkbox" id="tema" class="pengalih-tema">
+  <label for="tema" class="tombol-tema">Tema gelap</label>
+    <div class="header-baris">
+      <h1>DISNEY</h1>
+      <nav aria-label="Navigasi utama">
+        <ul>
+          <li><a href="#home">HOME</a></li>
+          <li><a href="#toy-story">TOY STORY</a></li>
+          <li><a href="#moana">MOANA</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p>Disney adalah perusahaan hiburan asal Amerika Serikat yang udah dikenal di seluruh dunia. Selama puluhan tahun, Disney selalu berhasil menghibur berbagai generasi lewat film-film animasi ikonik, taman bermain, dan karya kreatif lainnya.</p>
+  </header>
+
+  <main>
+    <section id="toy-story">
+      <h2>Toy Story</h2>
+      <p>Toy Story merupakan salah satu film animasi paling ikonik dari Disney Pixar yang menceritakan kehidupan rahasia para mainan.</p>
+      
+      <figure>
+        <img src="toy-story.jpg" alt="Poster film Toy Story menampilkan karakter Woody dan Buzz Lightyear" width="640" height="360" loading="lazy">
+        <figcaption>Karakter utama dalam film Toy Story.</figcaption>
+      </figure>
+    </section>
+
+    <section id="moana">
+      <h2>Moana</h2>
+      <p>Moana mengisahkan petualangan seorang gadis pemberani yang berlayar mengarungi lautan untuk menyelamatkan bangsanya. Film ini menampilkan latar kebudayaan Pasifik yang kaya.</p>
+
+      <figure>
+        <img src="moana.jpg" alt="Suasana petualangan Moana di lautan lepas" width="640" height="360" loading="lazy">
+        <figcaption>Petualangan Moana mengarungi samudera.</figcaption>
+      </figure>
+
+      <table>
+        <caption>Daftar Film Disney</caption>
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Judul Film</th>
+            <th scope="col">Tahun Rilis</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Toy Story</td>
+            <td>1995</td>
+            <td>Animasi, Petualangan</td>
+            <td>8.3/10</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Toy Story 2</td>
+            <td>1999</td>
+            <td>Animasi, Komedi</td>
+            <td>7.9/10</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Moana</td>
+            <td>2016</td>
+            <td>Animasi, Musikal</td>
+            <td>7.6/10</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Silakan isi formulir berikut untuk memberikan komentar mengenai film Disney favorit.</p>
+
+      <form action="/simpan" method="post">
+        <p>
+          <label for="nama">Nama</label><br>
+          <input type="text" id="nama" name="nama" required>
+        </p>
+        <p>
+          <label for="email">Email</label><br>
+          <input type="email" id="email" name="email" required>
+        </p>
+        <p>
+          <label for="komentar">Komentar</label><br>
+          <input type="text" id="komentar" name="komentar" required>
+        </p>
+        <button type="submit">Kirim</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Joselyn Putra Wiratama · 25523148 · Kelas A · 2026</p>
+  </footer>
+
+</body>
+</html>
