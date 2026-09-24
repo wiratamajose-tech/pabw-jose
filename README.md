@@ -51,3 +51,10 @@ harus mengubah warna tombol, tautan, judul, dan garis fokus.
 
 # pesan commit yang disarankan:
 # Pertemuan 4: gaya form dan keadaan fokus
+
+
+# pesan commit yang disarankan:
+# Pertemuan 4: tema gelap dan tombol pengalih
+
+# pesan commit yang disarankan:
+# Pertemuan 4: tampilan halaman profil selesai
