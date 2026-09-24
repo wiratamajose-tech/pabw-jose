@@ -22,7 +22,7 @@ Saya menggunakan bantuan AI sebatas menyusun sintaks awal HTML5 semantik dan mem
  
 - Berkas gaya yang akan dibuat: tokens.css, base.css,
   layout.css, komponen.css, tema.css
-- Warna utama: #1D3A8C (biru), dipilih karena ...
+- Warna utama: #1D3A8C (biru), dipilih karena mudah dikenali
  
 ### Token yang saya tetapkan
  
@@ -39,3 +39,6 @@ harus mengubah warna tombol, tautan, judul, dan garis fokus.
  
 # pesan commit yang disarankan:
 # Pertemuan 4: rencana design token di README
+
+# pesan commit yang disarankan:
+# Pertemuan 4: tokens.css dan pemuatan berkas gaya
