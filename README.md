@@ -42,3 +42,9 @@ harus mengubah warna tombol, tautan, judul, dan garis fokus.
 
 # pesan commit yang disarankan:
 # Pertemuan 4: tokens.css dan pemuatan berkas gaya
+
+# pesan commit yang disarankan:
+# Pertemuan 4: base.css reset dan tipografi
+
+# pesan commit yang disarankan:
+# Pertemuan 4: layout.css navbar dan katalog kartu
