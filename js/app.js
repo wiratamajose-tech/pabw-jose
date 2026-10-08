@@ -1,20 +1,19 @@
-const namaLengkap = "Joselyn Putra Wiratama";
-const peran = "Mahasiswa Informatika yang belajar front-end";
-const keahlian = ["HTML", "CSS", "JavaScript"];
-const jumlahProyek = 3;
-
 const profil = {
-  nama: namaLengkap,
-  peran: peran,
-  keahlian: keahlian,
-  jumlahProyek: jumlahProyek
+  nama: "Joselyn Putra Wiratama",
+  peran: "Mahasiswa Informatika yang belajar front-end",
+  keahlian: ["HTML", "CSS", "JavaScript"]
 };
 
-function buatPerkenalan({ nama, peran }) {
-  return `${nama} — ${peran}`;
-}
+const daftarProyek = [
+  { judul: "Halaman Profil", tahun: 2026, selesai: true },
+  { judul: "Katalog Produk", tahun: 2026, selesai: false }
+];
 
-const formatKeahlian = (daftar) => daftar.join(" · ");
+console.table(profil.keahlian);
+console.table(daftarProyek);
 
-console.log(buatPerkenalan(profil));
-console.log(formatKeahlian(profil.keahlian));
+const selesai = daftarProyek.filter((proyek) => proyek.selesai);
+console.table(selesai);
+
+const katalog = daftarProyek.find((proyek) => proyek.judul === "Katalog Produk");
+console.log(katalog);
