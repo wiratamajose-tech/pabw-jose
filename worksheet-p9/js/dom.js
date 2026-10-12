@@ -1,9 +1,16 @@
 import { daftarProyek } from './app.js';
 
-const daftarProyekEl = document.querySelector("#daftar-proyek");
-const wadahFilterEl = document.querySelector("#wadah-filter");
+const daftarProyekEl = document.querySelector("#daftar-proyek") || document.querySelector("#daftar");
+const barisFilter = document.querySelector("#wadah-filter") || document.querySelector("#filter");
 const pesanKosongEl = document.querySelector("#pesan-kosong");
 const formKontakEl = document.querySelector("#form-kontak");
+
+function tandaiTombolAktif(tombolAktif) {
+    const tombolList = document.querySelectorAll("#wadah-filter button, #filter button");
+    tombolList.forEach((tombol) => {
+        tombol.classList.toggle("aktif", tombol === tombolAktif);
+    });
+}
 
 function renderProyek(proyekList) {
     if (!daftarProyekEl) return;
@@ -18,8 +25,8 @@ function renderProyek(proyekList) {
     }
 
     proyekList.forEach(proyek => {
-        const kartu = document.createElement("div");
-        kartu.classList.add("kartu-proyek");
+        const kartu = document.createElement("li");
+        kartu.classList.add("kartu");
 
         const judul = document.createElement("h3");
         judul.textContent = proyek.judul;
@@ -35,19 +42,22 @@ function renderProyek(proyekList) {
     });
 }
 
-if (wadahFilterEl) {
-    wadahFilterEl.addEventListener("click", (event) => {
-        const tombol = event.target.closest("button"); 
+if (barisFilter) {
+    barisFilter.addEventListener("click", (event) => {
+        const tombol = event.target.closest("button");
         if (!tombol) return;
 
-        const kategoriPilihan = tombol.dataset.kategori;
+        const statusPilihan = tombol.dataset.kategori;
+        
+        const terpilih = daftarProyek.filter((proyek) => {
+            if (statusPilihan === "semua") return true;
+            if (statusPilihan === "selesai") return proyek.selesai === true;
+            if (statusPilihan === "proses") return proyek.selesai === false;
+            return true;
+        });
 
-        if (kategoriPilihan === "semua") {
-            renderProyek(daftarProyek);
-        } else {
-            const hasilFilter = daftarProyek.filter(p => p.kategori === kategoriPilihan);
-            renderProyek(hasilFilter);
-        }
+        tandaiTombolAktif(tombol);
+        renderProyek(terpilih);
     });
 }
 
