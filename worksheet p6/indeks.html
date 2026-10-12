@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney - Profil Hiburan & Animasi</title>
+  
+  
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="komponen.css">
+  <link rel="stylesheet" href="tema.css">
+  
+  <link rel="stylesheet" href="responsif.css">
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="isi">
+
+      <aside class="sisi">
+        <header>
+          <div class="area-tema">
+            <input type="checkbox" id="tema" class="pengalih-tema">
+            <label for="tema" class="tombol-tema">Tema gelap</label>
+          </div>
+
+          <h1>DISNEY</h1>
+          <p>Sebagai salah satu perusahaan hiburan dan media massa terbesar asal Amerika Serikat, Disney tidak hanya dikenal lewat karya film dan animasi revolusioner yang melahirkan karakter-karakter legendaris dunia, tetapi juga lewat ekosistem hiburan yang luas—mulai dari wahana taman rekreasi tematik, tayangan televisi, hingga platform media digital yang menghubungkan jutaan penggemar dari berbagai usia di seluruh dunia</p>
+          
+          <nav aria-label="Navigasi utama">
+            <ul>
+              <li><a href="#home">HOME</a></li>
+              <li><a href="#toy-story">TOY STORY</a></li>
+              <li><a href="#moana">MOANA</a></li>
+              <li><a href="#komentar-section">KOMENTAR</a></li>
+            </ul>
+          </nav>
+        </header>
+      </aside>
+
+      <main class="utama">
+        
+        <section id="toy-story" class="kartu">
+          <div class="kartu__isi">
+            <h2>Toy Story</h2>
+            <p>Toy Story merupakan salah satu film animasi paling ikonik dari Disney Pixar yang menceritakan kehidupan rahasia para mainan.</p>
+            
+            <figure>
+              <img src="toy-story.jpg" alt="Poster film Toy Story menampilkan karakter Woody dan Buzz Lightyear" width="640" height="360" loading="lazy">
+              <figcaption class="kartu__kaki">Karakter utama dalam film Toy Story.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="moana" class="kartu">
+          <div class="kartu__isi">
+            <h2>Moana</h2>
+            <p>Moana mengisahkan petualangan seorang gadis pemberani yang berlayar mengarungi lautan untuk menyelamatkan bangsanya. Film ini menampilkan latar kebudayaan Pasifik yang kaya.</p>
+
+            <figure>
+              <img src="moana.jpg" alt="Suasana petualangan Moana di lautan lepas" width="640" height="360" loading="lazy">
+              <figcaption class="kartu__kaki">Petualangan Moana mengarungi samudera.</figcaption>
+            </figure>
+
+            <div class="table-wrap">
+              <table>
+                <caption>Daftar Film Disney</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Judul Film</th>
+                    <th scope="col">Tahun Rilis</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Toy Story</td>
+                    <td>1995</td>
+                    <td>Animasi, Petualangan</td>
+                    <td>8.3/10</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Moana</td>
+                    <td>2016</td>
+                    <td>Animasi, Musikal</td>
+                    <td>8.0/10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </section>
+
+        <section id="komentar-section" class="kartu">
+          <div class="kartu__isi">
+            <h2>Komentar Pengunjung</h2>
+            <p>Silakan isi formulir berikut untuk memberikan komentar mengenai film Disney favorit.</p>
+
+            <form id="formKomentar">
+              <p class="form-kolom">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" required>
+              </p>
+              <p class="form-kolom">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </p>
+              <p class="form-kolom">
+                <label for="komentar">Komentar</label>
+                <textarea id="komentar" name="komentar" rows="4" required></textarea>
+              </p>
+              <button type="submit">Kirim</button>
+            </form>
+
+            <hr style="margin-block: var(--space-4);">
+
+            <h3>Daftar Komentar Terkirim:</h3>
+            <div id="daftarKomentar">
+              <p style="color: #777;">Belum ada komentar.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <footer>
+      <p>Joselyn Putra Wiratama · 25523148 · Kelas A · 2026</p>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('formKomentar').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nama = document.getElementById('nama').value;
+      const komentar = document.getElementById('komentar').value;
+      const tempatKomentar = document.getElementById('daftarKomentar');
+
+      if (tempatKomentar.innerHTML.includes('Belum ada komentar')) {
+        tempatKomentar.innerHTML = '';
+      }
+
+      const elemenBaru = document.createElement('div');
+      elemenBaru.style.borderLeft = '3px solid var(--color-primary, #007bff)';
+      elemenBaru.style.paddingLeft = '10px';
+      elemenBaru.style.marginBottom = '12px';
+      elemenBaru.innerHTML = `<strong>${nama}</strong><br><p style="margin: 0;">${komentar}</p>`;
+
+      tempatKomentar.appendChild(elemenBaru);
+      document.getElementById('formKomentar').reset();
+    });
+  </script>
+
+</body>
+</html>
