@@ -1,44 +1,46 @@
 import { daftarProyek } from './app.js';
 
-const daftarProyekEl = document.querySelector("#daftar-proyek") || document.querySelector("#daftar");
+const wadah = document.querySelector("#daftar-proyek") || document.querySelector("#daftar");
 const barisFilter = document.querySelector("#wadah-filter") || document.querySelector("#filter");
-const pesanKosongEl = document.querySelector("#pesan-kosong");
-const formKontakEl = document.querySelector("#form-kontak");
+const kosong = document.querySelector("#pesan-kosong");
+const form = document.querySelector("#form-kontak");
+
+function buatKartu(proyek) {
+    const li = document.createElement("li");
+    li.className = "kartu";
+
+    const judul = document.createElement("h3");
+    judul.textContent = proyek.judul;
+
+    const tahun = document.createElement("p");
+    tahun.textContent = `Tahun: ${proyek.tahun}`;
+
+    const status = document.createElement("span");
+    status.textContent = proyek.selesai ? "Selesai" : "Dalam Proses";
+
+    li.append(judul, tahun, status);
+    return li;
+}
+
+function render(daftar) {
+    if (!wadah) return;
+
+    wadah.textContent = "";
+
+    if (!daftar || daftar.length === 0) {
+        if (kosong) kosong.hidden = false;
+        return;
+    }
+
+    if (kosong) kosong.hidden = true;
+
+    daftar.forEach((proyek) => wadah.append(buatKartu(proyek)));
+}
 
 function tandaiTombolAktif(tombolAktif) {
     const tombolList = document.querySelectorAll("#wadah-filter button, #filter button");
     tombolList.forEach((tombol) => {
         tombol.classList.toggle("aktif", tombol === tombolAktif);
-    });
-}
-
-function renderProyek(proyekList) {
-    if (!daftarProyekEl) return;
-
-    daftarProyekEl.textContent = "";
-
-    if (!proyekList || proyekList.length === 0) {
-        if (pesanKosongEl) pesanKosongEl.style.display = "block";
-        return;
-    } else {
-        if (pesanKosongEl) pesanKosongEl.style.display = "none";
-    }
-
-    proyekList.forEach(proyek => {
-        const kartu = document.createElement("li");
-        kartu.classList.add("kartu");
-
-        const judul = document.createElement("h3");
-        judul.textContent = proyek.judul;
-
-        const tahun = document.createElement("p");
-        tahun.textContent = `Tahun: ${proyek.tahun}`;
-
-        const status = document.createElement("span");
-        status.textContent = proyek.selesai ? "Selesai" : "Dalam Proses";
-
-        kartu.append(judul, tahun, status);
-        daftarProyekEl.append(kartu);
     });
 }
 
@@ -48,7 +50,7 @@ if (barisFilter) {
         if (!tombol) return;
 
         const statusPilihan = tombol.dataset.kategori;
-        
+
         const terpilih = daftarProyek.filter((proyek) => {
             if (statusPilihan === "semua") return true;
             if (statusPilihan === "selesai") return proyek.selesai === true;
@@ -57,39 +59,65 @@ if (barisFilter) {
         });
 
         tandaiTombolAktif(tombol);
-        renderProyek(terpilih);
+        render(terpilih);
     });
 }
 
-if (formKontakEl) {
-    formKontakEl.addEventListener("submit", (event) => {
-        event.preventDefault();
+if (form) {
+    const inputs = form.querySelectorAll("input, textarea");
+    const tombolKirim = form.querySelector("button[type='submit']");
 
-        let adaGalat = false;
-        const inputs = formKontakEl.querySelectorAll("input, textarea");
+    function periksaForm() {
+        let seluruhKolomLayak = true;
 
-        inputs.forEach(input => {
-            const pesanGalatEl = input.nextElementSibling; 
+        inputs.forEach((input) => {
+            const pesanGalat = input.nextElementSibling;
+            const nilai = input.value.trim();
 
-            if (input.value.trim() === "") {
-                adaGalat = true;
-                if (pesanGalatEl && pesanGalatEl.classList.contains("pesan-galat")) {
-                    pesanGalatEl.textContent = `${input.name || "Kolom ini"} tidak boleh kosong!`;
-                    pesanGalatEl.style.display = "block";
+            if (nilai === "") {
+                seluruhKolomLayak = false;
+                input.setAttribute("aria-invalid", "true");
+                if (pesanGalat && pesanGalat.classList.contains("pesan-galat")) {
+                    pesanGalat.textContent = `${input.name || "Kolom ini"} tidak boleh kosong!`;
+                    pesanGalat.style.display = "block";
                 }
             } else {
-                if (pesanGalatEl && pesanGalatEl.classList.contains("pesan-galat")) {
-                    pesanGalatEl.textContent = "";
-                    pesanGalatEl.style.display = "none";
+                input.setAttribute("aria-invalid", "false");
+                if (pesanGalat && pesanGalat.classList.contains("pesan-galat")) {
+                    pesanGalat.textContent = "";
+                    pesanGalat.style.display = "none";
                 }
             }
         });
 
-        if (!adaGalat) {
-            alert("Form berhasil dikirim!");
-            formKontakEl.reset();
+        if (tombolKirim) {
+            tombolKirim.disabled = !seluruhKolomLayak;
         }
+
+        return seluruhKolomLayak;
+    }
+
+    inputs.forEach((input) => {
+        input.addEventListener("input", periksaForm);
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const sah = periksaForm();
+
+        if (!sah) {
+            const kolomBermasalah = form.querySelector("[aria-invalid='true']");
+            if (kolomBermasalah) {
+                kolomBermasalah.focus();
+            }
+            return;
+        }
+
+        alert("Form berhasil dikirim!");
+        form.reset();
+        periksaForm();
     });
 }
 
-renderProyek(daftarProyek);
+render(daftarProyek);
