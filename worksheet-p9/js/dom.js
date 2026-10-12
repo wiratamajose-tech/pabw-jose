@@ -1,4 +1,4 @@
-import { dataProyek } from './app.js';
+import { daftarProyek } from './app.js';
 
 const daftarProyekEl = document.querySelector("#daftar-proyek");
 const wadahFilterEl = document.querySelector("#wadah-filter");
@@ -6,8 +6,9 @@ const pesanKosongEl = document.querySelector("#pesan-kosong");
 const formKontakEl = document.querySelector("#form-kontak");
 
 function renderProyek(proyekList) {
+    if (!daftarProyekEl) return;
 
-    daftarProyekEl.innerHTML = "";
+    daftarProyekEl.textContent = "";
 
     if (!proyekList || proyekList.length === 0) {
         if (pesanKosongEl) pesanKosongEl.style.display = "block";
@@ -16,20 +17,20 @@ function renderProyek(proyekList) {
         if (pesanKosongEl) pesanKosongEl.style.display = "none";
     }
 
-    proyekList.map(proyek => {
+    proyekList.forEach(proyek => {
         const kartu = document.createElement("div");
         kartu.classList.add("kartu-proyek");
 
         const judul = document.createElement("h3");
-        judul.textContent = proyek.nama;
+        judul.textContent = proyek.judul;
 
-        const deskripsi = document.createElement("p");
-        deskripsi.textContent = proyek.deskripsi;
+        const tahun = document.createElement("p");
+        tahun.textContent = `Tahun: ${proyek.tahun}`;
 
-        const kategori = document.createElement("span");
-        kategori.textContent = `Kategori: ${proyek.kategori}`;
+        const status = document.createElement("span");
+        status.textContent = proyek.selesai ? "Selesai" : "Dalam Proses";
 
-        kartu.append(judul, deskripsi, kategori);
+        kartu.append(judul, tahun, status);
         daftarProyekEl.append(kartu);
     });
 }
@@ -42,9 +43,9 @@ if (wadahFilterEl) {
         const kategoriPilihan = tombol.dataset.kategori;
 
         if (kategoriPilihan === "semua") {
-            renderProyek(dataProyek);
+            renderProyek(daftarProyek);
         } else {
-            const hasilFilter = dataProyek.filter(p => p.kategori === kategoriPilihan);
+            const hasilFilter = daftarProyek.filter(p => p.kategori === kategoriPilihan);
             renderProyek(hasilFilter);
         }
     });
@@ -81,4 +82,4 @@ if (formKontakEl) {
     });
 }
 
-renderProyek(dataProyek);
+renderProyek(daftarProyek);
