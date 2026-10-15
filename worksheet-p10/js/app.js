@@ -14,6 +14,11 @@ async function muat() {
     aturMemuat(true);
     const daftar = await ambilProyek();
     console.table(daftar);
+
+    console.log(daftar[0].judul);
+    const badan = JSON.stringify({ judul: 'Judul contoh', kategori: 'web' });
+    console.log(typeof badan);
+    
     pasangFilter(daftar);
     render(daftar);
   } catch (err) {
