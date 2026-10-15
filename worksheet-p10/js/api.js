@@ -1,4 +1,4 @@
-const ALAMAT = 'data/proyek.json';
+const ALAMAT = 'https://raw.githubusercontent.com/wiratamajose-tech/pabw-jose/main/worksheet-p10/data/proyek.json';
 
 export async function ambilProyek() {
   try {
