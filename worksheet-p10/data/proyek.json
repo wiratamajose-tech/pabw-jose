@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "judul": "Halaman Profil",
+    "tahun": 2026,
+    "kategori": "web"
+  },
+  {
+    "id": 2,
+    "judul": "Katalog Produk",
+    "tahun": 2026,
+    "kategori": "web"
+  },
+  {
+    "id": 3,
+    "judul": "Toy Story",
+    "tahun": 1995,
+    "kategori": "Animasi, Petualangan"
+  },
+  {
+    "id": 4,
+    "judul": "Moana",
+    "tahun": 2016,
+    "kategori": "Animasi, Musikal"
+  }
+]
