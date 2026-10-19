@@ -1,3 +1,5 @@
+import { saring } from './data.js';
+
 const wadah = document.querySelector("#daftar-proyek") || document.querySelector("#daftar");
 const barisFilter = document.querySelector("#wadah-filter") || document.querySelector("#filter");
 const kosong = document.querySelector("#pesan-kosong") || document.querySelector("#kosong");
@@ -6,7 +8,7 @@ const form = document.querySelector("#form-kontak") || document.querySelector("#
 
 let dataProyekLokal = [];
 
-function buatKartu(proyek) {
+export function buatKartu(proyek, favorit = []) {
     const li = document.createElement("li");
     li.className = "kartu";
 
@@ -19,7 +21,12 @@ function buatKartu(proyek) {
     const status = document.createElement("span");
     status.textContent = proyek.kategori || (proyek.selesai ? "Selesai" : "Dalam Proses");
 
-    li.append(judul, tahun, status);
+    const tombolFavorit = document.createElement("button");
+    tombolFavorit.className = "favorit";
+    tombolFavorit.dataset.id = proyek.id;
+    tombolFavorit.textContent = favorit.includes(proyek.id) ? "★" : "☆";
+
+    li.append(judul, tahun, status, tombolFavorit);
     return li;
 }
 
@@ -33,19 +40,21 @@ export function tampilkanGalat(pesan) {
     console.error(pesan);
 }
 
-export function render(daftar) {
+export function render(state) {
     if (!wadah) return;
 
     wadah.textContent = "";
 
-    if (!daftar || daftar.length === 0) {
+    const tampil = saring(state.daftarProyek, state.kategoriAktif);
+
+    if (!tampil || tampil.length === 0) {
         if (kosong) kosong.hidden = false;
         return;
     }
 
     if (kosong) kosong.hidden = true;
 
-    daftar.forEach((proyek) => wadah.append(buatKartu(proyek)));
+    tampil.forEach((proyek) => wadah.append(buatKartu(proyek, state.favorit)));
 }
 
 export function pasangFilter(daftar) {
